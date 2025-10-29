@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servis Lyží - Profesionálny servis s láskou</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        /* Reset a základné štýly */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background-color: #f4f7fa;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        /* Navigácia */
+        nav {
+            background-color: #1a3b5d;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-weight: 600;
+            font-size: 1.3rem;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #4da8ff;
+            transition: width 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #4da8ff;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        /* Mobilné menu */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                height: 100vh;
+                width: 100%;
+                background-color: #1a3b5d;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 3rem;
+                transition: left 0.4s ease;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .nav-links li a {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Sekcie */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #home {
+            background: #1A3B5D;
+            background: linear-gradient(0deg, rgba(26, 59, 93, 1) 0%, rgba(160, 174, 188, 1) 0%, rgba(255, 255, 255, 1) 35%);
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+            color: black;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+
+        #home .motto {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 0.8rem 0;
+            color: #1a3b5d;
+        }
+
+        #home p:last-of-type {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 1rem auto;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+        }
+
+        /* O nás */
+        #o-nas {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-top: -3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        #o-nas .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        #o-nas ul {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        #o-nas ul li {
+            padding: 0.7rem 0;
+            font-size: 1.1rem;
+            position: relative;
+            padding-left: 2.2rem;
+        }
+
+        #o-nas ul li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: #1a3b5d;
+            font-weight: bold;
+        }
+
+        /* Cenník */
+        #cennik {
+            background-color: #ebf3ff;
+        }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .price-table th {
+            background-color: #1a3b5d;
+            color: white;
+            padding: 1.2rem;
+            text-align: left;
+        }
+
+        .price-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .price-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .price-table .price {
+            font-weight: bold;
+            color: #1a3b5d;
+            font-size: 1.3rem;
+        }
+
+        .info-box {
+            background-color: #d4e9ff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            text-align: center;
+            font-weight: 600;
+            color: #1a3b5d;
+        }
+
+        /* Galéria */
+        #galeria {
+            text-align: center;
+        }
+
+        #galeria img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            margin: 1rem auto;
+            display: block;
+            }
+
+        #galeria img:hover {
+            transform: scale 120%;
+            transition: transform 0.3s;
+        }
+
+        /* Kontakt */
+        #kontakt {
+            background-color: #1a3b5d;
+            color: white;
+            text-align: center;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            
+        }
+
+        .contact-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .contact-item h3 {
+            margin-bottom: 0.5rem;
+            color: #4da8ff;
+        }
+
+       
+    </style>
+</head>
+<body>
+
+    <!-- Navigácia -->
+    <nav>
+        <a href="#home" class="logo">Servis Lyží</a>
+        <ul class="nav-links">
+            <li><a href="#home">Domov</a></li>
+            <li><a href="#o-nas">O nás</a></li>
+            <li><a href="#cennik">Cenník</a></li>
+            <li><a href="#galeria">Galéria</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Domov -->
+    <section id="home">
+        <p><img src="stiahnuť.jpg" alt="Lyže"></p>
+        <h1>Profesionálny Servis Lyží</h1>
+        <p class="motto">pri Spišskej Novej Vsi</p>
+        <p class="motto">Rýchlo, jednoducho a precízne</p>
+        <p>S láskou k zimným športom a precíznosťou k detailom.</p>
+    </section>
+
+    <!-- O nás -->
+    <section id="o-nas">
+        <div class="container">
+            <div>
+                <h2>O nás</h2>
+                <p><strong>Servis lyží je dôležitý</strong> – správne pripravené lyže znamenajú lepšiu kontrolu, rýchlosť a predovšetkým bezpečnosť na svahu.</p>
+                <p>My v <strong>Servise Lyží</strong> robíme našu prácu <strong>s láskou</strong>, <strong>časovo spoľahlivo</strong> a s <strong>viac ako 8-ročnými skúsenosťami</strong> v oblasti servisu lyží a snowboardov.</p>
+            </div>
+            <div>
+                <h3>Čo ponúkame:</h3>
+                <ul>
+                    <li>Rúčne brúsenie hrán 87°</li>
+                    <li>Strojový podbrus sklznice</li>
+                    <li>Voskovanie</li>
+                    <li>Brúsenie diamantom</li>
+                    <li>Zalievanie rýh</li>
+                    <li>Väčšie opravy poškodenej sklznice</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cenník -->
+    <section id="cennik">
+        <h2 style="text-align:center; margin-bottom:1.5rem;">Cenník služieb</h2>
+        <table class="price-table">
+            <tr>
+                <th>Služba</th>
+                <th>Obsah</th>
+                <th>Cena</th>
+            </tr>
+            <tr>
+                <td><strong>1. Základný servis</strong></td>
+                <td>Brúsenie hrán 87°, podbrus sklznice, brúsenie diamantom, voskovanie</td>
+                <td class="price">15 €</td>
+            </tr>
+            <tr>
+                <td><strong>2. Rozšírený servis</strong></td>
+                <td>Základný servis + zalievanie rýh</td>
+                <td class="price">20 €</td>
+            </tr>
+            <tr>
+                <td><strong>3. Oprava sklznice</strong></td>
+                <td>Väčšie poškodenia, hlboké ryhy, štrukturálne opravy</td>
+                <td class="price">Cena podľa dohody</td>
+            </tr>
+        </table>
+
+        <div class="info-box">
+            <p>Pre informácie o dostupnosti a termínoch servisu ma prosím kontaktujte telefonicky na <strong>0907 463 601</strong>.</p>
+        </div>
+    </section>
+
+    <!-- Galéria -->
+    <section id="galeria">
+        <h2>Galéria – Naša práca</h2>
+        <p>Príklad precíznej opravy poškodenej sklznice</p>
+        <img src="lyze.jpg" alt="Lyže" style="width: 50%">
+        <p><em>Okrem bežného servisu viem opraviť aj takéto poškodenie sklznice. Ak máš záujem, ozvi sa!</em></p>
+    </section>
+
+    <!-- Kontakt -->
+    <section id="kontakt">
+        <h2>Kontaktujte nás</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <h3>Telefón</h3>
+                <p><a href="tel:0907463601" style="color:#4da8ff; text-decoration:none;">0907 463 601</a></p>
+            </div>
+            <div class="contact-item">
+                <h3>E-mail</h3>
+                <p><a href="mailto:martinpacnar@gmail.com" style="color:#4da8ff; text-decoration:none;">martinpacnar@gmail.com</a></p>
+            </div>
+            <div class="contact-item">
+                <h3>Adresa</h3>
+                <p>Lieskovany 44</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Hamburger menu
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Smooth scroll + zatvorenie menu
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+                
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
